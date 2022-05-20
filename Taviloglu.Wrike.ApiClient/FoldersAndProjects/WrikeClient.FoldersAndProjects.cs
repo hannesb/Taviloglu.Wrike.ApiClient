@@ -57,13 +57,32 @@ namespace Taviloglu.Wrike.ApiClient
             .AddParameter("customField", customField)
             .AddParameter("updatedDate", updatedDate, new CustomDateTimeConverter("yyyy-MM-dd'T'HH:mm:ss'Z'"))
             .AddParameter("project", isProject)
-            .AddParameter("deleted", isDeleted)
             .AddParameter("fields", optionalFields);
 
-            if (!useFolderId)
-            {
+            if (!useFolderId) {
                 uriBuilder.AddParameter("deleted", isDeleted);
             }
+
+            var response = await SendRequest<WrikeFolderTree>(uriBuilder.GetUri(), HttpMethods.Get).ConfigureAwait(false);
+            return GetReponseDataList(response);
+        }
+
+        async Task<List<WrikeFolderTree>> IWrikeFoldersAndProjectsClient.GetSpaceFolderTreeAsync(string spaceId, string permalink, bool? addDescendants, WrikeMetadata metadata, WrikeCustomFieldData customField, WrikeDateFilterRange updatedDate, bool? isProject, bool? isDeleted, List<string> optionalFields)
+        {
+            if (spaceId == null) {
+                throw new ArgumentNullException(nameof(spaceId));
+            }
+            var requestUri = $"spaces/{spaceId}/folders";
+
+            var uriBuilder = new WrikeUriBuilder(requestUri)
+            .AddParameter("permalink", permalink)
+            .AddParameter("descendants", addDescendants)
+            .AddParameter("metadata", metadata)
+            .AddParameter("customField", customField)
+            .AddParameter("updatedDate", updatedDate, new CustomDateTimeConverter("yyyy-MM-dd'T'HH:mm:ss'Z'"))
+            .AddParameter("project", isProject)
+            .AddParameter("deleted", isDeleted)
+            .AddParameter("fields", optionalFields);
 
             var response = await SendRequest<WrikeFolderTree>(uriBuilder.GetUri(), HttpMethods.Get).ConfigureAwait(false);
             return GetReponseDataList(response);

@@ -48,6 +48,31 @@ namespace Taviloglu.Wrike.ApiClient
             List<string> optionalFields = null);
 
         /// <summary>
+        /// Returns a list of tree entries
+        /// Scopes: Default, wsReadOnly, wsReadWrite
+        /// </summary>
+        /// <param name="spaceId">Returns list of entries for subtree of this space.</param>
+        /// <param name="permalink">Folder permalink, exact match</param>
+        /// <param name="addDescendants">Adds all descendant folders to search scope</param>
+        /// <param name="metadata">Folders metadata filter</param> 
+        /// <param name="customField">Custom field filter</param>
+        /// <param name="updatedDate">Updated date filter, range</param>
+        /// <param name="isProject">Get only projects (true) / only folders (false)</param>
+        /// <param name="isDeleted">Get folders from Root (false) / Recycle Bin (true)</param>
+        /// <param name="optionalFields">optional fields to be included in the response model. Use <see cref="WrikeFolderTree.OptionalFields"/></param> 
+        /// See <see href="https://developers.wrike.com/documentation/api/methods/get-folder-tree"/>
+        Task<List<WrikeFolderTree>> GetSpaceFolderTreeAsync(
+            string spaceId,
+            string permalink = null,
+            bool? addDescendants = null,
+            WrikeMetadata metadata = null,
+            WrikeCustomFieldData customField = null,
+            WrikeDateFilterRange updatedDate = null,
+            bool? isProject = null,
+            bool? isDeleted = null,
+            List<string> optionalFields = null);
+
+        /// <summary>
         ///  Create a folder within a folder. Specify virtual rootFolderId in order to create a folder in the account root
         ///  Scopes: Default, wsReadWrite
         /// </summary>

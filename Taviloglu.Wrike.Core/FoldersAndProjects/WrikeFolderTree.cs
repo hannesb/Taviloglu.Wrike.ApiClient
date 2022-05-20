@@ -41,11 +41,17 @@ namespace Taviloglu.Wrike.Core.FoldersAndProjects
         public WrikeProject Project { get; set; }
 
         /// <summary>
+        /// Is folder a space
+        /// </summary>
+        [JsonProperty("space")]
+        public bool IsSpace { get; set; }
+
+        /// <summary>
         /// Optional fields to be included in the response model 
         /// </summary>
         public class OptionalFields
         {
-            public static List<string> List = new List<string> { Metadata, HasAttachments, AttachmentCount, Description, BriefDescription, CustomFields, CustomColumnIds, SuperParentIds, Color };
+            public static List<string> List = new List<string> { Metadata, HasAttachments, AttachmentCount, Description, BriefDescription, CustomFields, CustomColumnIds, SuperParentIds, Color, Space };
             public const string Metadata = "metadata";
             public const string HasAttachments = "hasAttachments";
             public const string AttachmentCount = "attachmentCount";
@@ -55,6 +61,7 @@ namespace Taviloglu.Wrike.Core.FoldersAndProjects
             public const string CustomColumnIds = "customColumnIds";
             public const string SuperParentIds = "superParentIds";
             public const string Color = "color";
+            public const string Space = "space";
         }
     }
 
