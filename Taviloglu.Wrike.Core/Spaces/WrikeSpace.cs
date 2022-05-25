@@ -12,7 +12,7 @@ namespace Taviloglu.Wrike.Core.Spaces
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="WrikeSpace"></see> class with the
-        ///  title, memberIds and metadata for the new space.
+        ///  title for the new space.
         /// </summary>
         /// <param name="title">Title of space</param>
         public WrikeSpace(string title)
